@@ -21,8 +21,6 @@ export default function Seguranca() {
         qrbox: 250,
       },
       async (decodedText) => {
-        console.log("QR LIDO:", decodedText)
-
         // simula validação no banco
         await new Promise((resolve) => setTimeout(resolve, 800))
 

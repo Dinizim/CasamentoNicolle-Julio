@@ -56,22 +56,42 @@ export default function Home() {
       return
     }
 
+    let token = data.qr_token
+
     if (data.confirmado && data.qr_token) {
       setQrToken(data.qr_token)
-      setLoading(false)
-      return
+    } else {
+      token = crypto.randomUUID()
+
+      await supabase
+        .from("convidados")
+        .update({
+          confirmado: true,
+          qr_token: token,
+          email: emailFormatado,
+        })
+        .eq("id", data.id)
     }
 
-    const token = crypto.randomUUID()
-
-    await supabase
-      .from("convidados")
-      .update({
-        confirmado: true,
-        qr_token: token,
-        email: emailFormatado,
+    // Enviar email com QR Code
+    try {
+      const response = await fetch("/api/send-email", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          nome: data.nome,
+          email: emailFormatado || data.email,
+          qrToken: token,
+        }),
       })
-      .eq("id", data.id)
+
+      if (!response.ok) {
+        const result = await response.json()
+        setErro(result.error || "Não foi possível enviar o email")
+      }
+    } catch {
+      setErro("Erro ao tentar enviar o email")
+    }
 
     setQrToken(token)
     setLoading(false)
@@ -84,12 +104,12 @@ export default function Home() {
     <section
       className="h-screen bg-fixed bg-center bg-cover flex items-center justify-center text-center"
       style={{
-  backgroundImage: "url('https://images.unsplash.com/photo-1522673607200-164d1b6ce486?q=80&w=1974')",
+  backgroundImage: "url('/img/Foto1.jpeg')",
 }}
     >
       <div className="bg-black/40 w-full h-full flex flex-col items-center justify-center px-6">
         <h1 className="text-6xl font-serif text-white mb-6">
-          João & Maria
+          Julio & Nicolli
         </h1>
 
         <p className="text-white mb-6">
@@ -129,7 +149,7 @@ export default function Home() {
     <section
       className="h-[60vh] bg-fixed bg-center bg-cover"
       style={{
-  backgroundImage: "url('https://images.unsplash.com/photo-1519741497674-611481863552?q=80&w=1974')",
+  backgroundImage: "url('/img/Foto2.jpeg')",
 }}
     >
       <div className="bg-black/30 w-full h-full flex items-center justify-center">
@@ -159,7 +179,7 @@ export default function Home() {
     <section
       className="h-[60vh] bg-fixed bg-center bg-cover"
       style={{
-      backgroundImage: "url('https://images.unsplash.com/photo-1520854221256-17451cc331bf?q=80&w=1974')",
+      backgroundImage: "url('/img/Foto3.jpeg')",
 }}
     >
       <div className="bg-black/30 w-full h-full flex items-center justify-center">
@@ -220,9 +240,10 @@ export default function Home() {
 
               <button
                 onClick={handleConfirmar}
-                className="bg-black text-white w-full py-2"
+                disabled={loading}
+                className="bg-black text-white w-full py-2 disabled:opacity-50"
               >
-                Confirmar
+                {loading ? "Enviando..." : "Confirmar"}
               </button>
 
               {erro && <p className="text-red-500 mt-2">{erro}</p>}
