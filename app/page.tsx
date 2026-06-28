@@ -242,9 +242,6 @@ export default function Home() {
         >
           Confirmar Presença
         </button>
-       <p className="text-2xl text-[#E7C37A] italic mt-10">
-       Confirme sua presença apenas se realmente puder compartilhar esse momento tão especial conosco.
-</p>
   </div>
 
 </div>
