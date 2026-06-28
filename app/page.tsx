@@ -1,8 +1,6 @@
 "use client"
 
 import { useState, useEffect } from "react"
-import { supabase } from "@/lib/supabase"
-import QRCode from "react-qr-code"
 import { convidados } from "./data/convidados"
 
 export default function Home() {
