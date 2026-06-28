@@ -30,7 +30,7 @@ export async function POST(request: Request) {
     await transporter.sendMail({
       from: `"Julio & Nicolle" <${process.env.EMAIL_USER}>`,
       to: email,
-      subject: "Seu QR Code de Presença - Casamento Julio & Nicolle",
+      subject: "Seu Código de Presença - Casamento Julio & Nicolle",
       html: emailHtml,
     });
 
