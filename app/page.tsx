@@ -103,7 +103,7 @@ export default function Home() {
     <section
       className="h-screen bg-fixed bg-center bg-cover flex items-center justify-center text-center"
       style={{
-        backgroundImage: "url('/img/foto6.jpeg')",
+        backgroundImage: "url('/img/Foto6.jpeg')",
       }}
     >
       <div className="w-full h-full bg-gradient-to-b from-[#8A5A44]/30 to-black/40 flex flex-col items-center justify-center px-6">
