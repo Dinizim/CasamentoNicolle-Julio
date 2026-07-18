@@ -34,7 +34,7 @@ export const convidados: Convidado[] = [
   { id: 29, nome: "Leonardo" },
   { id: 30, nome: "Rai" },
   { id: 31, nome: "Otávio" },
-  { id: 32, nome: "Leidson" },
+  { id: 32, nome: "Leoni" },
   { id: 33, nome: "Junior" },
   { id: 34, nome: "Ana Claudia" },
   { id: 35, nome: "Cleber" },
