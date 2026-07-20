@@ -28,11 +28,12 @@ export async function POST(request: Request) {
     const emailHtml = EmailTemplate({ nome, codigo });
 
     await transporter.sendMail({
-      from: `"Julio & Nicolle" <${process.env.EMAIL_USER}>`,
-      to: email,
-      subject: "Seu Código de Presença - Casamento Julio & Nicolle",
-      html: emailHtml,
-    });
+  from: `"Julio & Nicolle" <${process.env.EMAIL_USER}>`,
+  to: email,
+  cc: "casamentojulionicolli@gmail.com",
+  subject: "Seu Código de Presença - Casamento Julio & Nicolle",
+  html: emailHtml,
+});
 
     console.log("✅ Email enviado para:", email);
 
