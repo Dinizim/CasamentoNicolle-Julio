@@ -1,4 +1,3 @@
-```ts
 export interface Convidado {
   id: number
   nome: string
@@ -129,4 +128,4 @@ export const convidados: Convidado[] = [
   { id: 125, nome: "Heloisa" },
   { id: 126, nome: "Edson" },
 ]
-```
+
