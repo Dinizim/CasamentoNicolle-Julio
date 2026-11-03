@@ -2,6 +2,14 @@
 
 import { useState, useEffect } from "react"
 import { convidados } from "./data/convidados"
+import QRCode from "react-qr-code"
+import {
+  presentes,
+  formatarValor,
+  gerarPixPayload,
+  PIX_CHAVE,
+  type Presente,
+} from "./data/presentes"
 
 export default function Home() {
   const [modalOpen, setModalOpen] = useState(false)
@@ -10,6 +18,14 @@ export default function Home() {
   const [qrToken, setQrToken] = useState<string | null>(null)
   const [erro, setErro] = useState("")
   const [loading, setLoading] = useState(false)
+  const [presente, setPresente] = useState<Presente | null>(null)
+  const [copiado, setCopiado] = useState<"" | "codigo" | "chave">("")
+
+  async function copiar(texto: string, tipo: "codigo" | "chave") {
+    await navigator.clipboard.writeText(texto)
+    setCopiado(tipo)
+    setTimeout(() => setCopiado(""), 2000)
+  }
 
 
   const [tempo, setTempo] = useState({
@@ -195,19 +211,48 @@ export default function Home() {
         Lista de Presentes
       </h2>
 
-      <p className="text-lg text-[#6B5B52] mb-10">
-        Caso deseje nos presentear, escolha um item exclusivamente pela nossa
-        lista oficial da Havan.
+      <div className="w-24 h-[2px] bg-[#D7B16D] mx-auto mb-8"></div>
+
+      <p className="max-w-2xl mx-auto text-lg text-[#6B5B52] mb-14">
+        Sua presença já é o nosso maior presente. Mas, se quiser nos
+        presentear (e dar umas risadas), escolha uma opção abaixo e pague via PIX.
       </p>
 
-      <a
-        href="https://lista.havan.com.br/Convidado/ItensListaPresente/890141"
-        target="_blank"
-        rel="noopener noreferrer"
-        className="inline-block bg-[#B66A42] hover:bg-[#9E5938] text-white px-8 py-4 rounded-full transition shadow-lg"
-      >
-        Ver Lista de Presentes
-      </a>
+      <div className="max-w-6xl mx-auto grid gap-4 sm:gap-6 grid-cols-2 lg:grid-cols-4">
+        {presentes.map((p) => (
+          <div
+            key={p.descricao}
+            className="bg-[#FFFDF9] border border-[#E9D9B8] rounded-2xl overflow-hidden shadow-md hover:shadow-xl hover:-translate-y-1 transition duration-300 flex flex-col"
+          >
+            <div className="aspect-[4/3] bg-[#F3E9DA] flex items-center justify-center overflow-hidden">
+              {p.imagem ? (
+                <img
+                  src={p.imagem}
+                  alt={p.descricao}
+                  className="w-full h-full object-cover"
+                />
+              ) : (
+                <span className="text-6xl">{p.emoji}</span>
+              )}
+            </div>
+
+            <div className="p-4 sm:p-6 flex flex-col flex-1">
+              <p className="text-[#6B5B52] text-sm sm:text-base flex-1">
+                {p.descricao}
+              </p>
+              <p className="text-2xl font-bold text-[#8A5A44] my-4">
+                {formatarValor(p.valor)}
+              </p>
+              <button
+                onClick={() => setPresente(p)}
+                className="bg-[#B66A42] hover:bg-[#9E5938] text-white uppercase tracking-wider text-sm py-3 rounded-full transition"
+              >
+                Presentear
+              </button>
+            </div>
+          </div>
+        ))}
+      </div>
 
     </section>
 
@@ -288,6 +333,58 @@ export default function Home() {
       </p>
 
     </footer>
+
+    {/* MODAL PIX */}
+    {presente && (
+      <div
+        className="fixed inset-0 bg-black/70 flex items-center justify-center z-50 px-4"
+        onClick={() => setPresente(null)}
+      >
+        <div
+          className="relative bg-[#FFFDF9] rounded-2xl shadow-2xl w-full max-w-md p-8 text-center max-h-[95vh] overflow-y-auto"
+          onClick={(e) => e.stopPropagation()}
+        >
+          <button
+            onClick={() => setPresente(null)}
+            className="absolute top-3 right-4 text-2xl text-[#A88A56] hover:text-[#B66A42]"
+            aria-label="Fechar"
+          >
+            ×
+          </button>
+
+          <h2 className="text-3xl font-serif text-[#B66A42] mb-2">
+            Obrigado! 🎁
+          </h2>
+          <p className="text-[#6B5B52] mb-1">{presente.descricao}</p>
+          <p className="text-3xl font-bold text-[#8A5A44] mb-6">
+            {formatarValor(presente.valor)}
+          </p>
+
+          <div className="bg-white p-4 rounded-xl inline-block border border-[#E9D9B8]">
+            <QRCode value={gerarPixPayload(presente.valor)} size={200} />
+          </div>
+          <p className="text-sm text-[#A88A56] mt-3 mb-6">
+            Leia o QR Code no app do seu banco
+          </p>
+
+          <button
+            onClick={() => copiar(gerarPixPayload(presente.valor), "codigo")}
+            className="w-full bg-[#B66A42] hover:bg-[#9E5938] text-white py-3 rounded-lg transition mb-3"
+          >
+            {copiado === "codigo" ? "Código copiado ✓" : "Copiar PIX copia e cola"}
+          </button>
+
+          <button
+            onClick={() => copiar(PIX_CHAVE, "chave")}
+            className="w-full border border-[#D7B16D] text-[#8A5A44] py-3 rounded-lg transition hover:bg-[#F3E9DA]"
+          >
+            {copiado === "chave"
+              ? "Chave copiada ✓"
+              : `Copiar chave PIX (celular): ${PIX_CHAVE}`}
+          </button>
+        </div>
+      </div>
+    )}
 
     {/* MODAL */}
     {modalOpen && (
