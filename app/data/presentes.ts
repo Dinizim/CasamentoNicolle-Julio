@@ -12,18 +12,18 @@ export type Presente = {
 }
 
 export const presentes: Presente[] = [
-  { descricao: "Toma aqui uns 50 reais", valor: 50, emoji: "💸" },
-  { descricao: "Só para não dizer que eu não dei nada", valor: 100, emoji: "🤷" },
-  { descricao: "Lenço para a noiva não borrar a maquiagem", valor: 200, emoji: "😭" },
-  { descricao: "Uma calça para uma jovem de 16 anos", valor: 300, emoji: "👖" },
-  { descricao: "Aumente suas chances de pegar o buquê", valor: 400, emoji: "💐" },
-  { descricao: "Primeiro lugar na fila do buffet", valor: 500, emoji: "🍝" },
-  { descricao: "1 ano de corte de cabelo do noivo", valor: 600, emoji: "💈" },
-  { descricao: "Psicólogo para os noivos não surtarem nos preparativos", valor: 700, emoji: "🧠" },
-  { descricao: "Ajuda para pagar os boletos do casamento", valor: 800, emoji: "🧾" },
-  { descricao: "Levar alguém que não foi convidado", valor: 900, emoji: "🙊" },
-  { descricao: "Claro que posso pagar esse presente, meu marido tem dois empregos", valor: 1000, emoji: "💅" },
-  { descricao: "Dei o melhor presente", valor: 1100, emoji: "🤑" },
+  { descricao: "Toma aqui uns 50 reais", valor: 50, emoji: "💸", imagem: "/img/presentes/1.jpg" },
+  { descricao: "Só para não dizer que eu não dei nada", valor: 100, emoji: "🤷", imagem: "/img/presentes/2.jpg" },
+  { descricao: "Lenço para a noiva não borrar a maquiagem", valor: 200, emoji: "😭", imagem: "/img/presentes/3.jpg" },
+  { descricao: "Uma calça para uma jovem de 16 anos", valor: 300, emoji: "👖", imagem: "/img/presentes/4.jpg" },
+  { descricao: "Aumente suas chances de pegar o buquê", valor: 400, emoji: "💐", imagem: "/img/presentes/5.jpg" },
+  { descricao: "Primeiro lugar na fila do buffet", valor: 500, emoji: "🍝", imagem: "/img/presentes/6.jpg" },
+  { descricao: "1 ano de corte de cabelo do noivo", valor: 600, emoji: "💈", imagem: "/img/presentes/7.jpg" },
+  { descricao: "Psicólogo para os noivos não surtarem nos preparativos", valor: 700, emoji: "🧠", imagem: "/img/presentes/8.jpg" },
+  { descricao: "Ajuda para pagar os boletos do casamento", valor: 800, emoji: "🧾", imagem: "/img/presentes/9.jpg" },
+  { descricao: "Levar alguém que não foi convidado", valor: 900, emoji: "🙊", imagem: "/img/presentes/10.jpg" },
+  { descricao: "Claro que posso pagar esse presente, meu marido tem dois empregos", valor: 1000, emoji: "💅", imagem: "/img/presentes/11.jpg" },
+  { descricao: "Dei o melhor presente", valor: 1100, emoji: "🤑", imagem: "/img/presentes/12.jpg" },
 ]
 
 export function formatarValor(valor: number) {

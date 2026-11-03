@@ -20,6 +20,8 @@ export default function Home() {
   const [loading, setLoading] = useState(false)
   const [presente, setPresente] = useState<Presente | null>(null)
   const [copiado, setCopiado] = useState<"" | "codigo" | "chave">("")
+  // Imagens que não carregaram: o card mostra o emoji no lugar
+  const [semImagem, setSemImagem] = useState<string[]>([])
 
   async function copiar(texto: string, tipo: "codigo" | "chave") {
     await navigator.clipboard.writeText(texto)
@@ -225,11 +227,12 @@ export default function Home() {
             className="bg-[#FFFDF9] border border-[#E9D9B8] rounded-2xl overflow-hidden shadow-md hover:shadow-xl hover:-translate-y-1 transition duration-300 flex flex-col"
           >
             <div className="aspect-[4/3] bg-[#F3E9DA] flex items-center justify-center overflow-hidden">
-              {p.imagem ? (
+              {p.imagem && !semImagem.includes(p.imagem) ? (
                 <img
                   src={p.imagem}
                   alt={p.descricao}
                   className="w-full h-full object-cover"
+                  onError={() => setSemImagem((s) => [...s, p.imagem!])}
                 />
               ) : (
                 <span className="text-6xl">{p.emoji}</span>
