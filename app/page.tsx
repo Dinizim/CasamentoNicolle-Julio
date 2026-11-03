@@ -226,12 +226,12 @@ export default function Home() {
             key={p.descricao}
             className="bg-[#FFFDF9] border border-[#E9D9B8] rounded-2xl overflow-hidden shadow-md hover:shadow-xl hover:-translate-y-1 transition duration-300 flex flex-col"
           >
-            <div className="aspect-[4/3] bg-[#F3E9DA] flex items-center justify-center overflow-hidden">
+            <div className="aspect-[6/5] bg-[#F3E9DA] flex items-center justify-center overflow-hidden">
               {p.imagem && !semImagem.includes(p.imagem) ? (
                 <img
                   src={p.imagem}
                   alt={p.descricao}
-                  className="w-full h-full object-cover"
+                  className="w-full h-full object-cover object-top"
                   onError={() => setSemImagem((s) => [...s, p.imagem!])}
                 />
               ) : (
