@@ -1,3 +1,4 @@
+
 export interface Convidado {
   id: number
   nome: string
@@ -33,7 +34,7 @@ export const convidados: Convidado[] = [
   { id: 28, nome: "Micaela" },
   { id: 29, nome: "Leidson" },
   { id: 30, nome: "Rai" },
-  { id: 31, nome: "Otávio" },
+  { id: 31, nome: "Raiane" },
   { id: 32, nome: "Leoni" },
   { id: 33, nome: "Junior" },
   { id: 34, nome: "Ana Claudia" },
@@ -128,6 +129,5 @@ export const convidados: Convidado[] = [
   { id: 125, nome: "Heloisa" },
   { id: 126, nome: "Edson" },
   { id: 127, nome: "Kauã" },
-
+  { id: 128, nome: "Heloisa" },
 ]
-
