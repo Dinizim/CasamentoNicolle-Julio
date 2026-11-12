@@ -82,7 +82,7 @@ export const convidados: Convidado[] = [
   { id: 77, nome: "Graça" },
   { id: 78, nome: "Paloma" },
   { id: 79, nome: "Junior" },
-  { id: 80, nome: "Diego" },
+  { id: 80, nome: "Diogo" },
   { id: 81, nome: "Larissa" },
   { id: 82, nome: "Neta" },
   { id: 83, nome: "Carol" },
