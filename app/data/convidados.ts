@@ -127,5 +127,7 @@ export const convidados: Convidado[] = [
   { id: 124, nome: "Erick" },
   { id: 125, nome: "Heloisa" },
   { id: 126, nome: "Edson" },
+  { id: 127, nome: "Kauã" },
+
 ]
 
