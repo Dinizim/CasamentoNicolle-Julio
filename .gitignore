@@ -39,3 +39,6 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# lista com e-mails dos convidados (não versionar)
+destinatarios*.csv
