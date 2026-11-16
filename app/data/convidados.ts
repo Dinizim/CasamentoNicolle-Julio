@@ -112,5 +112,8 @@ export const convidados: Convidado[] = [
   { id: 106, nome: "Edson" },
   { id: 107, nome: "Raquel" },
   { id: 108, nome: "Erick" },
-  { id: 109, nome: "Heloisa" },
+  { id: 109, nome: "Isaac" },
+  { id: 110, nome: "Sofia" },
+  { id: 111, nome: "Carol" },
+  { id: 112, nome: "Heloisa" },
 ]
